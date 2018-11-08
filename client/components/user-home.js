@@ -1,18 +1,49 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import ScrollList from './scroll-list'
 
 /**
  * COMPONENT
  */
-export const UserHome = props => {
-  const {email} = props
+class UserHome extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      selectedButton: 'inquiries'
+    }
+  }
 
-  return (
-    <div>
-      <h3>Welcome, {email}</h3>
-    </div>
-  )
+  handleClick = event => {
+    this.setState({
+      selectedButton: event.target.value
+    })
+  }
+
+  render() {
+    const user = this.props.user
+    const viewList =
+      this.state.selectedButton === 'inquiries'
+        ? this.props.inquiries
+        : this.props.replies
+    return !user.id ? (
+      <div>Fetching Data</div>
+    ) : (
+      <div>
+        <div>
+          <h3>Welcome, {user.firstName}</h3>
+        </div>
+        <ScrollList type={this.state.selectedButton} list={viewList} />
+        <div>
+          <button type="button" onClick={this.handleClick} value="inquiries">
+            Inquiries
+          </button>
+          <button type="button" onClick={this.handleClick} value="replies">
+            Replies
+          </button>
+        </div>
+      </div>
+    )
+  }
 }
 
 /**
@@ -20,15 +51,10 @@ export const UserHome = props => {
  */
 const mapState = state => {
   return {
-    email: state.user.email
+    user: state.user,
+    inquiries: state.user.inquiries,
+    replies: state.user.replies
   }
 }
 
 export default connect(mapState)(UserHome)
-
-/**
- * PROP TYPES
- */
-UserHome.propTypes = {
-  email: PropTypes.string
-}
