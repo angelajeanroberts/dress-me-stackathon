@@ -44,7 +44,9 @@ export const auth = (email, password, method) => async dispatch => {
   }
 
   try {
-    dispatch(getUser(res.data))
+    const userData = await axios.get(`/api/users/${res.data.id}`)
+    console.log('in auth', userData.data)
+    dispatch(getUser(userData.data))
     history.push('/home')
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)

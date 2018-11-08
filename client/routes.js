@@ -5,7 +5,10 @@ import PropTypes from 'prop-types'
 import {Login, Signup, UserHome} from './components'
 import SingleInquiry from './components/single-inquiry'
 import SingleReply from './components/single-reply'
+import LandingPage from './components/home'
 import {me} from './store'
+import InquiryForm from './components/request-form'
+import AllInquiries from './components/all-inquiries'
 
 /**
  * COMPONENT
@@ -23,12 +26,16 @@ class Routes extends Component {
         {/* Routes placed here are available to all visitors */}
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route path="/inquiries/:inquiryId" component={SingleInquiry} />
-        <Route path="/replies/:replyId" component={SingleReply} />
+        <Route path="/home" component={LandingPage} />
+        <Route exact path="/" component={LandingPage} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={UserHome} />
+            <Route path="/inquiries/:inquiryId" component={SingleInquiry} />
+            <Route path="/replies/:replyId" component={SingleReply} />
+            <Route exact path="/inquiries" component={AllInquiries} />
+            <Route exact path="/user" component={UserHome} />
+            <Route exact path ="/post" component={InquiryForm}/>
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

@@ -5,6 +5,7 @@ import axios from 'axios'
  */
 const GET_ALL_INQUIRIES = 'GET_INQUIRIES'
 const GET_INQUIRY = 'GET_INQUIRY'
+const POST_INQUIRY = 'POST_INQUIRY'
 
 /**
  * INITIAL STATE
@@ -19,6 +20,7 @@ const initialState = {
  */
 const setAllInquiries = inquiries => ({type: GET_ALL_INQUIRIES, inquiries})
 const setSelectedInquiry = inquiry => ({type: GET_INQUIRY, inquiry})
+const setNewInquiry = inquiry => ({type: POST_INQUIRY, inquiry })
 
 export const fetchAllInquiries = () => async dispatch => {
   try {
@@ -38,6 +40,15 @@ export const fetchSelectedInquiry = inquiryId => async dispatch => {
   }
 }
 
+export const fetchNewInquiry = inquiry => async dispatch => {
+  try {
+    const {data: newInquiry} = await axios.post('/api/inquiries', inquiry)
+    dispatch(setNewInquiry(newInquiry))
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export default function(state = initialState, action) {
   switch (action.type) {
     case GET_ALL_INQUIRIES:
@@ -49,6 +60,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         selectedInquiry: action.inquiry
+      }
+      case POST_INQUIRY:
+      return {
+        ...state,
+        allInquiries: [...state.allInquiries, action.inquiry]
       }
     default:
       return state

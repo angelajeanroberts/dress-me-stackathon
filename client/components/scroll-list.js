@@ -3,7 +3,8 @@ import ScrollArea from 'react-scrollbar'
 import {Link} from 'react-router-dom'
 
 const ScrollList = props => {
-  const {list, type} = props
+  const list = props.list
+  const type = props.type
 
   return (
     <div className="scroll-element">
