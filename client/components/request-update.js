@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {fetchNewInquiry, me} from '../store'
+import {fetchUpdatedInquiry} from '../store'
 
-class InquiryForm extends Component {
+class InquiryUpdate extends Component {
   constructor() {
     super()
     this.state = {
@@ -11,8 +11,7 @@ class InquiryForm extends Component {
       occasion: '',
       minPrice: 1000,
       maxPrice: 100000,
-      description: '',
-      userId: ''
+      description: ''
     }
   }
   handleChange = event => {
@@ -26,23 +25,20 @@ class InquiryForm extends Component {
       })
     }
   }
+
   handleSubmit = event => {
     event.preventDefault()
-    this.props.addNewInquiry(this.state)
-    this.setState({
-      title: '',
-      productType: '',
-      occasion: '',
-      minPrice: 1000,
-      maxPrice: 100000,
-      description: ''
-    })
+    this.props.updateInquiry(this.props.inquiry.id, this.state)
   }
 
   componentDidMount() {
-    this.props.loadInitialData()
     this.setState({
-      userId: this.props.userId
+      title: this.props.inquiry.title,
+      productType: this.props.inquiry.productType,
+      occasion: this.props.inquiry.occasion,
+      minPrice: this.props.inquiry.minPrice,
+      maxPrice: this.props.inquiry.maxPrice,
+      description: this.props.inquiry.description
     })
   }
 
@@ -82,7 +78,7 @@ class InquiryForm extends Component {
             type="number"
             name="minPrice"
             min="1"
-            value={this.state.minPrice/100}
+            value={this.state.minPrice / 100}
             onChange={this.handleChange}
           />
         </div>
@@ -92,7 +88,7 @@ class InquiryForm extends Component {
             type="number"
             min="1"
             name="maxPrice"
-            value={this.state.maxPrice/100}
+            value={this.state.maxPrice / 100}
             onChange={this.handleChange}
           />
         </div>
@@ -113,18 +109,10 @@ class InquiryForm extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    userId: state.user.id
-  }
-}
-
 const mapDispatchToProps = dispatch => {
   return {
-    addNewInquiry: newInquiry => dispatch(fetchNewInquiry(newInquiry)),
-    loadInitialData() {
-      dispatch(me())
-    }
+    updateInquiry: (inquiryId, updates) =>
+      dispatch(fetchUpdatedInquiry(inquiryId, updates))
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(InquiryForm)
+export default connect(null, mapDispatchToProps)(InquiryUpdate)

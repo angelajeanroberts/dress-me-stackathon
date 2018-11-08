@@ -72,7 +72,7 @@ router.get('/:replyId', async (req, res, next) => {
   
   router.delete('/:replyId', async (req, res, next) => {
     try {
-      await Reply.delete({
+      await Reply.destroy({
         where: {id: req.params.replyId}
       })
       res.sendStatus(204)

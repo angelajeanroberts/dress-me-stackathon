@@ -45,7 +45,6 @@ export const auth = (email, password, method) => async dispatch => {
 
   try {
     const userData = await axios.get(`/api/users/${res.data.id}`)
-    console.log('in auth', userData.data)
     dispatch(getUser(userData.data))
     history.push('/home')
   } catch (dispatchOrHistoryErr) {
@@ -57,7 +56,7 @@ export const logout = () => async dispatch => {
   try {
     await axios.post('/auth/logout')
     dispatch(removeUser())
-    history.push('/login')
+    history.push('/home')
   } catch (err) {
     console.error(err)
   }
