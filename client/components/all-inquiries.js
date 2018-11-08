@@ -10,8 +10,11 @@ class AllInquiries extends Component {
 
   render() {
     return (
-      <div>
+      <div className='window'>
+        <div className='center-display'>
+        <h2>click below to see an open request</h2>
         <ScrollList type="inquiries" list={this.props.inquiries} />
+      </div>
       </div>
     )
   }

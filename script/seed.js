@@ -51,6 +51,7 @@ async function seed() {
     Reply.create({
       title: 'Wool dress coat, black',
       productUrl: 'https://www.bloomingdales.com/shop/product/ted-baker-squish-shearling-collar-overcoat?ID=3011321&CategoryID=3864#fn=ppp%3Dundefined%26sp%3DNULL%26rId%3DNULL%26spc%3D33%26cm_kws%3Dwool%20coat%20mens%20black%26spp%3D13%26pn%3D1%7C1%7C13%7C33%26rsid%3Dundefined%26smp%3DexactMultiMatch',
+      imageUrl: 'https://images.bloomingdalesassets.com/is/image/BLM/products/0/optimized/9996110_fpx.tif?op_sharpen=1&wid=500&fit=fit,1&$filtersm$',
       description: 'A little dressy for day-to-day, but a great option for work and special occasions',
       status: 'Posted',
       inquiryId: 1,
@@ -59,6 +60,7 @@ async function seed() {
     Reply.create({
       title:'Dark green down parka',
       productUrl:'https://www.bloomingdales.com/shop/product/canada-goose-chilliwack-fur-trimmed-down-bomber-jacket?ID=3067922&CategoryID=3864#fn=ppp%3Dundefined%26sp%3DNULL%26rId%3DNULL%26spc%3D38%26cm_kws%3Dwinter%20coat%20mens%20green%26spp%3D16%26pn%3D1%7C1%7C16%7C38%26rsid%3Dundefined%26smp%3DexactMultiMatch',
+      imageUrl: 'https://images.bloomingdalesassets.com/is/image/BLM/products/0/optimized/9995360_fpx.tif?op_sharpen=1&wid=500&fit=fit,1&$filtersm$',
       description: 'Great for day-to-day and low temperatures',
       status: 'Posted',
       inquiryId: 1,
@@ -67,6 +69,7 @@ async function seed() {
     Reply.create({
       title: 'Brown dress shoes with buckle detail',
       productUrl: 'https://www.bloomingdales.com/shop/product/kenneth-cole-mens-capital-leather-monk-strap-cap-toe-loafers?ID=3074048&CategoryID=3864#fn=ppp%3Dundefined%26sp%3DNULL%26rId%3DNULL%26spc%3D52%26cm_kws%3Dbrown%20dress%20shoe%20men%26spp%3D22%26rsid%3Dundefined%26smp%3DexactMultiMatch',
+      imageUrl: 'https://images.bloomingdalesassets.com/is/image/BLM/products/2/optimized/10010402_fpx.tif?op_sharpen=1&wid=500&fit=fit,1&$filtersm$',
       description: 'Great work shoe that features a buckle instead of laces',
       status: 'Posted',
       inquiryId: 2,
@@ -75,6 +78,7 @@ async function seed() {
     Reply.create({
       title: 'Great for work and commuting',
       productUrl: 'https://www.bloomingdales.com/shop/product/boss-mens-highline-cap-toe-oxfords-100-exclusive?ID=2424949&CategoryID=3864#fn=ppp%3Dundefined%26sp%3DNULL%26rId%3DNULL%26spc%3D52%26cm_kws%3Dbrown%20dress%20shoe%20men%26spp%3D2%26pn%3D1%7C1%7C2%7C52%26rsid%3Dundefined%26smp%3DexactMultiMatch',
+      imageUrl: 'https://images.bloomingdalesassets.com/is/image/BLM/products/0/optimized/9338810_fpx.tif?op_sharpen=1&wid=500&fit=fit,1&$filtersm$',
       description: 'Great for day-to-day and will hold up against rain and snow',
       status: 'Accepted',
       tip: 1500,

@@ -33,45 +33,52 @@ class ReplyForm extends Component {
   }
 
   componentDidMount() {
-      this.setState({
-          userId: this.props.userId,
-          inquiryId: this.props.inquiryId
-      })
+    this.setState({
+      userId: this.props.userId,
+      inquiryId: this.props.inquiryId
+    })
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form className="post-form" onSubmit={this.handleSubmit}>
         <div>
           <label htmlFor="title">Respone Title:</label>
           <input
+            className="post-input"
             type="text"
             name="title"
             value={this.state.title}
             onChange={this.handleChange}
+            placeholder="e.g. Black Cole Haan Dress Shoes $150"
           />
         </div>
         <div>
           <label htmlFor="productUrl">Link to Product:</label>
           <input
+            className="post-input"
             type="text"
             name="productUrl"
             value={this.state.productUrl}
             onChange={this.handleChange}
+            placeholder="https://www.bloomingdales.com"
           />
         </div>
         <div>
           <label htmlFor="imageUrl">Image Link:</label>
           <input
+            className="post-input"
             type="text"
             name="imageUrl"
             value={this.state.imageUrl}
             onChange={this.handleChange}
+            placeholder="https://images.bloomingdalesassets.com/"
           />
         </div>
         <div>
           <label htmlFor="description">Description:</label>
-          <input
+          <textarea
+            className="post-input"
             type="text"
             name="description"
             value={this.state.description}
@@ -79,7 +86,9 @@ class ReplyForm extends Component {
           />
         </div>
         <div>
-          <button type="submit">Post</button>
+          <button className="post-button" type="submit">
+            Post
+          </button>
         </div>
       </form>
     )

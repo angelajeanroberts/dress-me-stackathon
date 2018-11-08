@@ -1,6 +1,7 @@
 import React from 'react'
 import ScrollArea from 'react-scrollbar'
 import {Link} from 'react-router-dom'
+import {Panel} from 'react-bootstrap'
 
 const ScrollList = props => {
   const list = props.list
@@ -8,7 +9,6 @@ const ScrollList = props => {
 
   return (
     <div className="scroll-element">
-      <div>{type}:</div>
       <ScrollArea
         speed={0.8}
         className="scroll-area"
@@ -18,10 +18,11 @@ const ScrollList = props => {
         <div className="scroll-list">
           {list.map(item => (
             <Link key={item.id} to={`/${type}/${item.id}`}>
-            <div>
-              <div>{item.title}</div>
-              <div>{item.description}</div>
-            </div>
+            <Panel>
+              <Panel.Heading>
+              <Panel.Title componentClass="h3">{item.title}</Panel.Title></Panel.Heading>
+              <Panel.Body>{item.description}</Panel.Body>
+            </Panel>
             </Link>
           ))}
         </div>

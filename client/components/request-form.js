@@ -48,67 +48,82 @@ class InquiryForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <div>
-          <label htmlFor="title">Request Title:</label>
-          <input
-            type="text"
-            name="title"
-            value={this.state.title}
-            onChange={this.handleChange}
-          />
+      <div className="window">
+        <div className="center-display">
+          <form className="post-form" onSubmit={this.handleSubmit}>
+            <div>
+              <label htmlFor="title">Request Title:</label>
+              <input
+                className="post-input"
+                type="text"
+                name="title"
+                value={this.state.title}
+                onChange={this.handleChange}
+                placeholder="e.g. Looking for a dress for a Miami wedding"
+              />
+            </div>
+            <div>
+              <label htmlFor="productType">Item Type:</label>
+              <input
+                className="post-input"
+                type="text"
+                name="productType"
+                value={this.state.productType}
+                onChange={this.handleChange}
+                placeholder="e.g. Dress"
+              />
+            </div>
+            <div>
+              <label htmlFor="occasion">Occasion:</label>
+              <input
+                className="post-input"
+                type="text"
+                name="occasion"
+                value={this.state.occasion}
+                onChange={this.handleChange}
+                placeholder="e.g. Wedding"
+              />
+            </div>
+            <div>
+              <label htmlFor="minPrice">Min Price (USD):</label>
+              <input
+                className="post-input"
+                type="number"
+                name="minPrice"
+                min="1"
+                value={this.state.minPrice / 100}
+                onChange={this.handleChange}
+                placeholder="e.g. 100"
+              />
+            </div>
+            <div>
+              <label htmlFor="maxPrice">Max Price (USD):</label>
+              <input
+                className="post-input"
+                type="number"
+                min="1"
+                name="maxPrice"
+                value={this.state.maxPrice / 100}
+                onChange={this.handleChange}
+                placeholder="e.g. 300"
+              />
+            </div>
+            <div>
+              <label htmlFor="description">Description:</label>
+              <textarea
+                className="post-input"
+                type="text"
+                name="description"
+                value={this.state.description}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div>
+              <button className='post-button' type="submit">Post</button>
+            </div>
+          </form>
         </div>
-        <div>
-          <label htmlFor="productType">Item Type:</label>
-          <input
-            type="text"
-            name="productType"
-            value={this.state.productType}
-            onChange={this.handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="occasion">Occasion:</label>
-          <input
-            type="text"
-            name="occasion"
-            value={this.state.occasion}
-            onChange={this.handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="minPrice">Min Price:</label>
-          <input
-            type="number"
-            name="minPrice"
-            min="1"
-            value={this.state.minPrice/100}
-            onChange={this.handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="maxPrice">Max Price:</label>
-          <input
-            type="number"
-            min="1"
-            name="maxPrice"
-            value={this.state.maxPrice/100}
-            onChange={this.handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="description">Description:</label>
-          <input
-            type="text"
-            name="description"
-            value={this.state.description}
-            onChange={this.handleChange}
-          />
-        </div>
-        <div>
-          <button type="submit">Post</button>
-        </div>
-      </form>
+      </div>
     )
   }
 }

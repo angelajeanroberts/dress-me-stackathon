@@ -11,23 +11,32 @@ class LandingPage extends Component {
   render() {
     const {isLoggedIn} = this.props
     return isLoggedIn ? (
-      <div>
+      <div className='window'>
+      <div className='center-display'>
+        <h2>what are you looking to do?</h2>
+        <div className='home-options'>
         <Link to="/post">
-          <button type="button">Post A Request</button>
+          <button className='home-button' type="button">Post A Request</button>
         </Link>
         <Link to="/inquiries">
-          <button type="button">Search Open Requests</button>
+          <button className='home-button' type="button">Search Open Requests</button>
         </Link>
+        </div>
+      </div>
       </div>
     ) : (
-      <div>
-        <h2>Log in or sign up to enter.</h2>
+      <div className='window'>
+      <div className='center-display'>
+        <h2>log in or sign up to enter</h2>
+        <div className='home-options'>
         <Link to="/login">
-          <button type="button">Log In</button>
+          <button className='home-button' type="button">Log In</button>
         </Link>
         <Link to="/signup">
-          <button type="button">Sign Up</button>
+          <button className='home-button' type="button">Sign Up</button>
         </Link>
+        </div>
+      </div>
       </div>
     )
   }

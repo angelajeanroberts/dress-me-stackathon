@@ -28,18 +28,21 @@ class UserHome extends React.Component {
     return !user.id ? (
       <div>Fetching Data</div>
     ) : (
-      <div>
+      <div className='window'>
+        <div className='center-display'>
         <div>
-          <h3>Welcome, {user.firstName}</h3>
+          <h3 className='header'>Welcome, {user.firstName}</h3>
+          <h4 className='header'>view or update your requests and responses below</h4>
         </div>
         <ScrollList type={this.state.selectedButton} list={viewList} />
-        <div>
-          <button type="button" onClick={this.handleClick} value="inquiries">
-            Inquiries
+        <div className='user-buttons'>
+          <button className='user-button' type="button" onClick={this.handleClick} value="inquiries">
+            Requests
           </button>
-          <button type="button" onClick={this.handleClick} value="replies">
-            Replies
+          <button className='user-button' type="button" onClick={this.handleClick} value="replies">
+            Responses
           </button>
+        </div>
         </div>
       </div>
     )

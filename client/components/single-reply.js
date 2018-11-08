@@ -4,6 +4,7 @@ import {fetchSelectedReply, fetchDeletedReply, me} from '../store'
 import {withRouter} from 'react-router'
 import ReplyUpdate from './response-update'
 import AcceptReply from './accept-response'
+import {Panel} from 'react-bootstrap'
 
 class SingleReply extends React.Component {
   constructor() {
@@ -17,11 +18,13 @@ class SingleReply extends React.Component {
   handleClick = event => {
     event.target.value === 'accept'
       ? this.setState({
-          acceptForm: this.state.acceptForm ? false : true
+          acceptForm: this.state.acceptForm ? false : true,
+          updateForm: false
         })
       : event.target.value === 'update'
         ? this.setState({
-            updateForm: this.state.updateForm ? false : true
+            updateForm: this.state.updateForm ? false : true,
+            acceptForm: false
           })
         : this.props.deleteReply(this.props.reply.id)
   }
@@ -35,27 +38,36 @@ class SingleReply extends React.Component {
     console.log(this.props.reply)
     if (this.props.reply === null) {
       return (
-        <div>
+        <div className='window'>
+          <div className='center-display'>
           <h1>This Response No Longer Exists</h1>
+          </div>
         </div>
       )
     } else {
       return (
-        <div>
-          <h1>Response Details:</h1>
+        <div className='window'>
           {!this.props.reply.id ? (
-            <div>Fetching data...</div>
+            <div className='center-dispaly'>Fetching data...</div>
           ) : (
-            <div>
-              <div>
-                <h3>{this.props.reply.title}</h3>
-                <h4>{this.props.reply.description}</h4>
-                <a href={this.props.reply.productUrl}>Link</a>
+            <div className='center-display'>
+              <h1>Response Details:</h1>
+              <div className='single-post'>
+              <Panel>
+                  <Panel.Heading>
+                    <Panel.Title componentClass="h3">{this.props.reply.title}</Panel.Title>
+                  </Panel.Heading>
+                  <Panel.Body>
+                  <div>{this.props.reply.description}</div>
+                  <a href={this.props.reply.productUrl}>Link to Product</a>
+                  </Panel.Body>
+                </Panel>
               </div>
               {this.props.reply.inquiry.userId === this.props.userId &&
               this.props.reply.inquiry.status === 'Open' ? (
                 <div>
                   <button
+                  className="user-button"
                     type="button"
                     value="accept"
                     onClick={this.handleClick}
@@ -70,6 +82,7 @@ class SingleReply extends React.Component {
               {this.props.reply.userId === this.props.userId ? (
                 <div>
                   <button
+                  className="user-button"
                     type="button"
                     value="update"
                     onClick={this.handleClick}
@@ -77,6 +90,7 @@ class SingleReply extends React.Component {
                     Update Response
                   </button>
                   <button
+                  className="user-button"
                     type="button"
                     value="delete"
                     onClick={this.handleClick}

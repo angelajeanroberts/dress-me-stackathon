@@ -44,10 +44,11 @@ class InquiryUpdate extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form className="post-form" onSubmit={this.handleSubmit}>
         <div>
           <label htmlFor="title">Request Title:</label>
           <input
+            className="post-input"
             type="text"
             name="title"
             value={this.state.title}
@@ -57,6 +58,7 @@ class InquiryUpdate extends Component {
         <div>
           <label htmlFor="productType">Item Type:</label>
           <input
+            className="post-input"
             type="text"
             name="productType"
             value={this.state.productType}
@@ -66,6 +68,7 @@ class InquiryUpdate extends Component {
         <div>
           <label htmlFor="occasion">Occasion:</label>
           <input
+            className="post-input"
             type="text"
             name="occasion"
             value={this.state.occasion}
@@ -75,6 +78,7 @@ class InquiryUpdate extends Component {
         <div>
           <label htmlFor="minPrice">Min Price:</label>
           <input
+            className="post-input"
             type="number"
             name="minPrice"
             min="1"
@@ -85,6 +89,7 @@ class InquiryUpdate extends Component {
         <div>
           <label htmlFor="maxPrice">Max Price:</label>
           <input
+            className="post-input"
             type="number"
             min="1"
             name="maxPrice"
@@ -94,7 +99,8 @@ class InquiryUpdate extends Component {
         </div>
         <div>
           <label htmlFor="description">Description:</label>
-          <input
+          <textarea
+            className="post-input"
             type="text"
             name="description"
             value={this.state.description}
@@ -102,7 +108,7 @@ class InquiryUpdate extends Component {
           />
         </div>
         <div>
-          <button type="submit">Post</button>
+          <button className="post-button" type="submit">Post</button>
         </div>
       </form>
     )

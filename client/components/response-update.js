@@ -34,10 +34,11 @@ class ReplyUpdate extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form className="post-form" onSubmit={this.handleSubmit}>
         <div>
           <label htmlFor="title">Request Title:</label>
           <input
+            className="post-input"
             type="text"
             name="title"
             value={this.state.title}
@@ -47,6 +48,7 @@ class ReplyUpdate extends Component {
         <div>
           <label htmlFor="productUrl">Link to Product:</label>
           <input
+            className="post-input"
             type="text"
             name="productUrl"
             value={this.state.productUrl}
@@ -56,6 +58,7 @@ class ReplyUpdate extends Component {
         <div>
           <label htmlFor="imageUrl">Image Link:</label>
           <input
+            className="post-input"
             type="text"
             name="imageUrl"
             value={this.state.imageUrl}
@@ -64,7 +67,8 @@ class ReplyUpdate extends Component {
         </div>
         <div>
           <label htmlFor="description">Description:</label>
-          <input
+          <textarea
+            className="post-input"
             type="text"
             name="description"
             value={this.state.description}
@@ -72,7 +76,7 @@ class ReplyUpdate extends Component {
           />
         </div>
         <div>
-          <button type="submit">Post</button>
+          <button className="post-button" type="submit">Post</button>
         </div>
       </form>
     )

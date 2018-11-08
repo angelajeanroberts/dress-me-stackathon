@@ -5,6 +5,7 @@ import {withRouter} from 'react-router'
 import ReplyForm from './response-form'
 import InquiryUpdate from './request-update'
 import ScrollList from './scroll-list'
+import {Panel} from 'react-bootstrap'
 
 class SingleInquiry extends React.Component {
   constructor() {
@@ -19,16 +20,22 @@ class SingleInquiry extends React.Component {
   handleClick = event => {
     event.target.value === 'post'
       ? this.setState({
-          replyForm: this.state.replyForm ? false : true
+          replyForm: this.state.replyForm ? false : true,
+          replies: false,
+          updateForm: false
         })
       : event.target.value === 'update'
         ? this.setState({
-            updateForm: this.state.updateForm ? false : true
+            updateForm: this.state.updateForm ? false : true,
+            replies: false,
+            replyForm: false
           })
         : event.target.value === 'delete'
           ? this.props.deleteInquiry(this.props.inquiry.id)
           : this.setState({
-              replies: this.state.replies ? false : true
+              replies: this.state.replies ? false : true,
+              replyForm: false,
+              updateForm: false
             })
   }
 
@@ -40,35 +47,51 @@ class SingleInquiry extends React.Component {
   render() {
     if (this.props.inquiry === null) {
       return (
-        <div>
-          <h1>This Post No Longer Exists</h1>
+        <div className="window">
+          <div className="center-display">
+            <h1>This Post No Longer Exists</h1>
+          </div>
         </div>
       )
     } else {
       return (
-        <div>
-          <h1>Request Details:</h1>
+        <div className="window">
           {!this.props.inquiry.id ? (
-            <div>Fetching data...</div>
+            <div className="center-display">Fetching data...</div>
           ) : (
-            <div>
-              <div>
-                <h3>{this.props.inquiry.title}</h3>
-                <h4>{this.props.inquiry.description}</h4>
+            <div className="center-display">
+              <h1>Request Details:</h1>
+              <div className="single-post">
+                <Panel>
+                  <Panel.Heading>
+                    <Panel.Title componentClass="h3">{this.props.inquiry.title}</Panel.Title>
+                  </Panel.Heading>
+                  <Panel.Body>{this.props.inquiry.description}</Panel.Body>
+                </Panel>
               </div>
               <div>
-              <button type="button" value="replies" onClick={this.handleClick}>
-                  View Current Responses
+                <button
+                  className="user-button"
+                  type="button"
+                  value="replies"
+                  onClick={this.handleClick}
+                >
+                  View Responses
+                </button>
+                <button
+                  className="user-button"
+                  type="button"
+                  value="post"
+                  onClick={this.handleClick}
+                >
+                  Post a Response
                 </button>
                 {this.state.replies ? (
                   <ScrollList
                     list={this.props.inquiry.replies}
-                    type='replies'
+                    type="replies"
                   />
                 ) : null}
-                <button type="button" value="post" onClick={this.handleClick}>
-                  Post Reply
-                </button>
                 {this.state.replyForm ? (
                   <ReplyForm
                     userId={this.props.inquiry.user.id}
@@ -78,6 +101,7 @@ class SingleInquiry extends React.Component {
                 {this.props.inquiry.user.id === this.props.userId ? (
                   <div>
                     <button
+                      className="user-button"
                       type="button"
                       value="update"
                       onClick={this.handleClick}
@@ -85,6 +109,7 @@ class SingleInquiry extends React.Component {
                       Update Request
                     </button>
                     <button
+                      className="user-button"
                       type="button"
                       value="delete"
                       onClick={this.handleClick}
