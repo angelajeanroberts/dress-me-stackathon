@@ -5,10 +5,14 @@ import {
   fetchUpdatedInquiry,
   fetchNewTransaction
 } from '../store'
+import Web3 from 'web3'
+
+const web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"))
+// const abi = JSON.parse('[{}] -- from the compiled json file')
 
 class AcceptReply extends Component {
-  constructor() {
-    super()
+  constructor(props, context) {
+    super(props, context)
     this.state = {
       tip: 100
     }
@@ -51,6 +55,7 @@ class AcceptReply extends Component {
   }
 
   render() {
+    console.log('web3', this.context)
     return (
       <form onSubmit={this.handleSubmit}>
         <div>

@@ -2,6 +2,7 @@ import React from 'react'
 import ScrollArea from 'react-scrollbar'
 import {Link} from 'react-router-dom'
 import {Panel} from 'react-bootstrap'
+import moment from 'moment'
 
 class ScrollList extends React.Component {
   constructor(props) {
@@ -27,12 +28,14 @@ class ScrollList extends React.Component {
   getFilteredPosts = () => {
     const {nameFilter, productTypeFilter} = this.state
     const list = this.props.list
-    console.log('gfp list', list)
     const filteredForName = list.filter(post => {
       const pattern = new RegExp(nameFilter, 'i')
       if (nameFilter.length > 0) {
         if (
-          !pattern.test(post.user.firstName || pattern.test(post.user.lastName))
+          !(
+            pattern.test(post.user.firstName) ||
+            pattern.test(post.user.lastName)
+          )
         ) {
           return false
         }
@@ -42,20 +45,24 @@ class ScrollList extends React.Component {
     const filteredForProduct = filteredForName.filter(post => {
       const pattern = new RegExp(productTypeFilter, 'i')
       if (productTypeFilter.length > 0) {
-        if (!pattern.test(post.productType)) {
-          return false
+        if (this.props.type === 'inquiries') {
+          if (!pattern.test(post.productType)) {
+            return false
+          }
+        } else {
+          if (!pattern.test(post.inquiry.productType)) {
+            return false
+          }
         }
       }
       return true
     })
-    console.log('gfp return', filteredForProduct)
     return filteredForProduct
   }
 
   render() {
     const list = this.props.list.length ? this.getFilteredPosts() : []
     const type = this.props.type
-    console.log('render', list)
     return (
       <div>
         <div className="search-bar">
@@ -92,7 +99,22 @@ class ScrollList extends React.Component {
                         {item.title}
                       </Panel.Title>
                     </Panel.Heading>
-                    <Panel.Body>{item.description}</Panel.Body>
+                    <Panel.Body>
+                      {type === 'inquiries' ? (
+                        <div>
+                          <div>Looking for: {item.productType}</div>
+                          <div>
+                            Posted by: {item.user.firstName}{' '}
+                            {item.user.lastName}
+                          </div>{' '}
+                        </div>
+                      ) : null}
+                      <div>Description: {item.description}</div>
+                      <div>
+                        Post Date:{' '}
+                        {moment(item.updatedAt).format('MMM Do YYYY')}
+                      </div>
+                    </Panel.Body>
                   </Panel>
                 </Link>
               ))}
