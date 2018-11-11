@@ -6,20 +6,22 @@ contract PayTip {
     uint public tip;
     
     constructor() public {
-        stylist = msg.sender;
-    }
-    
-    function setTip (uint amount) public {
-        tip = amount * 1; //1 ether
         client = msg.sender;
     }
-
-    function acceptTip () public {
-        stylist = msg.sender;
+    
+    function setTip (address to) public payable {
+        tip = msg.value;
+        client = msg.sender;
+        stylist = to;
     }
     
     function finishPayment() public {
         stylist.transfer(address(this).balance);
     }
-    
+
+    function kill() public {
+        if(client == msg.sender) {
+            selfdestruct(client);
+        }
+    }    
 }
