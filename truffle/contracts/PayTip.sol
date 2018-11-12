@@ -14,9 +14,12 @@ contract PayTip {
         client = msg.sender;
         stylist = to;
     }
+
+    event Sent(address from, address to, uint amount);
     
     function finishPayment() public {
         stylist.transfer(address(this).balance);
+        emit Sent(client, stylist, tip);
     }
 
     function kill() public {
