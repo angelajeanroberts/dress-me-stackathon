@@ -100,20 +100,20 @@ class ScrollList extends React.Component {
                       </Panel.Title>
                     </Panel.Heading>
                     <Panel.Body>
-                      {type === 'inquiries' ? (
-                        <div>
-                          <div>Looking for: {item.productType}</div>
-                          <div>
-                            Posted by: {item.user.firstName}{' '}
-                            {item.user.lastName}
-                          </div>{' '}
-                        </div>
-                      ) : null}
+                      {type === 'inquiries' && (
+                        <div>Looking for: {item.productType}</div>
+                      )}
+                      <div>
+                        Posted by: {item.user.firstName} {item.user.lastName}
+                      </div>
                       <div>Description: {item.description}</div>
                       <div>
                         Post Date:{' '}
                         {moment(item.updatedAt).format('MMM Do YYYY')}
                       </div>
+                      {type === 'replies' && (
+                      <a href={item.productUrl}>Link to Product</a>
+                      )}
                     </Panel.Body>
                   </Panel>
                 </Link>

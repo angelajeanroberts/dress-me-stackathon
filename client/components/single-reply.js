@@ -5,6 +5,7 @@ import {withRouter} from 'react-router'
 import ReplyUpdate from './response-update'
 import AcceptReply from './accept-response'
 import {Panel} from 'react-bootstrap'
+import moment from 'moment'
 
 class SingleReply extends React.Component {
   constructor() {
@@ -35,71 +36,87 @@ class SingleReply extends React.Component {
   }
 
   render() {
-    console.log(this.props.reply)
     if (this.props.reply === null) {
       return (
-        <div className='window'>
-          <div className='center-display'>
-          <h1>This Response No Longer Exists</h1>
+        <div className="window">
+          <div className="center-display">
+            <h1>This Response No Longer Exists</h1>
           </div>
         </div>
       )
     } else {
       return (
-        <div className='window'>
+        <div className="window">
           {!this.props.reply.id ? (
-            <div className='center-dispaly'>Fetching data...</div>
+            <div className="center-dispaly">Fetching data...</div>
           ) : (
-            <div className='center-display'>
+            <div className="center-display">
               <h1>Response Details:</h1>
-              <div className='single-post'>
-              <Panel>
+              <div className="single-post">
+                <Panel>
                   <Panel.Heading>
-                    <Panel.Title componentClass="h3">{this.props.reply.title}</Panel.Title>
+                    <Panel.Title componentClass="h3">
+                      {this.props.reply.title}
+                    </Panel.Title>
                   </Panel.Heading>
                   <Panel.Body>
-                  <div>{this.props.reply.description}</div>
-                  <a href={this.props.reply.productUrl}>Link to Product</a>
+                    <div>
+                      Posted by: {this.props.reply.user.firstName}{' '}
+                      {this.props.reply.user.lastName}
+                    </div>
+                    <div>Description: {this.props.reply.description}</div>
+                    <div>
+                      Post Date:{' '}
+                      {moment(this.props.reply.updatedAt).format('MMM Do YYYY')}
+                    </div>
+                    <a href={this.props.reply.productUrl}>Link to Product</a>
                   </Panel.Body>
                 </Panel>
               </div>
               {this.props.reply.inquiry.userId === this.props.userId &&
               this.props.reply.inquiry.status === 'Open' ? (
-                <div>
-                  <button
-                  className="user-button"
-                    type="button"
-                    value="accept"
-                    onClick={this.handleClick}
-                  >
-                    Accept Response
-                  </button>
-                  {this.state.acceptForm ? (
-                    <AcceptReply reply={this.props.reply} />
-                  ) : null}
-                </div>
+                this.state.acceptForm ? (
+                  <AcceptReply
+                    reply={this.props.reply}
+                    drizzle={this.props.drizzle}
+                    drizzleState={this.props.drizzleState}
+                  />
+                ) : (
+                  <div>
+                    <button
+                      className="user-button"
+                      type="button"
+                      value="accept"
+                      onClick={this.handleClick}
+                    >
+                      Accept Response
+                    </button>{' '}
+                  </div>
+                )
               ) : null}
               {this.props.reply.userId === this.props.userId ? (
                 <div>
-                  <button
-                  className="user-button"
-                    type="button"
-                    value="update"
-                    onClick={this.handleClick}
-                  >
-                    Update Response
-                  </button>
-                  <button
-                  className="user-button"
-                    type="button"
-                    value="delete"
-                    onClick={this.handleClick}
-                  >
-                    Delete Response
-                  </button>
-                  {this.state.updateForm ? (
-                    <ReplyUpdate reply={this.props.reply} />
-                  ) : null}
+                  <div>
+                    <button
+                      className="user-button"
+                      type="button"
+                      value="update"
+                      onClick={this.handleClick}
+                    >
+                      Update Response
+                    </button>
+                    <button
+                      className="user-button"
+                      type="button"
+                      value="delete"
+                      onClick={this.handleClick}
+                    >
+                      Delete Response
+                    </button>
+                    {this.state.updateForm ? (
+                      <ReplyUpdate reply={this.props.reply} />
+                    ) : null}
+                  </div>
                 </div>
               ) : null}
             </div>

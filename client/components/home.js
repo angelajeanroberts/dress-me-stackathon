@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {me} from '../store'
 
-class LandingPage extends Component {
+class HomePage extends Component {
   componentDidMount() {
     this.props.loadInitialData()
   }
@@ -56,4 +56,4 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(mapState, mapDispatch)(LandingPage)
+export default connect(mapState, mapDispatch)(HomePage)

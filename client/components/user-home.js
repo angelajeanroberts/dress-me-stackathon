@@ -1,6 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import ScrollList from './scroll-list'
+import {
+  fetchAllInquiries,
+  fetchAllReplies
+} from '../store'
 
 /**
  * COMPONENT
@@ -19,14 +23,21 @@ class UserHome extends React.Component {
     })
   }
 
+  componentDidMount() {
+    this.props.fetchAllInquiries()
+    this.props.fetchAllReplies()
+  }
+
   render() {
     const user = this.props.user
+    const inquiries = this.props.inquiries
+    const replies = this.props.replies
     const viewList =
       this.state.selectedButton === 'inquiries'
-        ? this.props.inquiries
-        : this.props.replies
-    return !user.id ? (
-      <div>Fetching Data</div>
+        ? inquiries.filter(inquiry => inquiry.userId === user.id)
+        : replies.filter(reply => reply.userId === user.id)
+    return !user.id || inquiries.id ? (
+      <div>Fetching Data...</div>
     ) : (
       <div className='window'>
         <div className='center-display'>
@@ -55,9 +66,16 @@ class UserHome extends React.Component {
 const mapState = state => {
   return {
     user: state.user,
-    inquiries: state.user.inquiries,
-    replies: state.user.replies
+    inquiries: state.inquiry.allInquiries,
+    replies: state.reply.allReplies
   }
 }
 
-export default connect(mapState)(UserHome)
+const mapDispatch = dispatch => {
+  return {
+    fetchAllReplies: () => dispatch(fetchAllReplies()),
+    fetchAllInquiries: () => dispatch(fetchAllInquiries())
+  }
+}
+
+export default connect(mapState, mapDispatch)(UserHome)
