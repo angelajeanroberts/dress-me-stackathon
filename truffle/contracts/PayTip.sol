@@ -5,26 +5,22 @@ contract PayTip {
     address public stylist;
     uint public tip;
     
-    constructor() public {
-        client = msg.sender;
-    }
-    
     function setTip (address to) public payable {
-        tip = msg.value;
         client = msg.sender;
+        tip = msg.value;
         stylist = to;
     }
 
     event Sent(address from, address to, uint amount);
+    event Cancelled(address to, uint amount);
     
     function finishPayment() public {
         stylist.transfer(address(this).balance);
         emit Sent(client, stylist, tip);
     }
 
-    function kill() public {
-        if(client == msg.sender) {
-            selfdestruct(client);
-        }
+    function undoPayment() public {
+        client.transfer(address(this).balance);
+        emit Cancelled(client, tip);
     }    
 }
